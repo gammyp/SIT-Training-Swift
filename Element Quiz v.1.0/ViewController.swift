@@ -10,9 +10,34 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var answerLabel: UILabel!
+    
+    @IBAction func showAnswer(_ sender: UIButton) {
+        answerLabel.text = elementList[currentElementIndex]
+    }
+    
+    @IBAction func goToNextElement(_ sender: Any) {
+        currentElementIndex = currentElementIndex+1
+        if (currentElementIndex >= elementList.count) {
+            currentElementIndex = 0
+        }
+        updateElement()
+    }
+    
+    func updateElement() {
+            answerLabel.text = "?"
+            imageView.image = UIImage(named: elementList[currentElementIndex])
+    }
+    
+    let elementList = ["Carbon", "Gold", "Chlorine", "Sodium"]
+    var currentElementIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        updateElement()
     }
 
 
